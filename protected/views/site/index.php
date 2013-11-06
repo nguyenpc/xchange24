@@ -7,20 +7,23 @@ $this->pageTitle=Yii::app()->name;
 
 <div class="row" style="background-color:red;">
 <?php
-$fromProcessor = PaymentProcessor::model()->findAll();
+$fromProcessor = CHtml::listData(PaymentProcessor::model()->find($condition=array('is_send'=>1)),'id','name');
 
-print_r($models);
 ?>
 <select   name="webmenu" id="select-have" style="float:left;margin:10px 10px 10px 10px" >
 <option value="0" data-icon="icon-heart">You have</option>
-      <option value="pm-usd" data-image="<?php echo Yii::app()->theme->baseUrl; ?>/images/icons/perfectmoney.png">Perfect Money USD</option>
-      <option value="pm-eur" data-image="<?php echo Yii::app()->theme->baseUrl; ?>/images/icons/perfectmoney.png">Perfect Money EUR</option>
+<?php foreach($fromProcessor as $key => $item ){?>
+<option value="<?php echo $key;?>" data-image="<?php echo Yii::app()->theme->baseUrl; ?>/images/icons/perfectmoney.png"><?php echo $item;?></option>
+      <!--option value="pm-eur" data-image="<?php echo Yii::app()->theme->baseUrl; ?>/images/icons/perfectmoney.png">Perfect Money EUR</option>
       <option value="ego-usd" data-image="<?php echo Yii::app()->theme->baseUrl; ?>/images/icons/egopay.png">EgoPay USD</option>
       <option value="ego-eur" data-image="<?php echo Yii::app()->theme->baseUrl; ?>/images/icons/egopay.png">EgoPay EUR</option>
       <option value="WMZ" data-image="<?php echo Yii::app()->theme->baseUrl; ?>/images/icons/webmoney.png">Webmoney WMZ</option>
       <option value="WME" data-image="<?php echo Yii::app()->theme->baseUrl; ?>/images/icons/webmoney.png">Webmoney WME</option>
-            <option value=USD data-image="<?php echo Yii::app()->theme->baseUrl; ?>/images/icons/solidtrustpay.png">SolidTrustPay USD</option>
+            <option value=USD data-image="<?php echo Yii::app()->theme->baseUrl; ?>/images/icons/solidtrustpay.png">SolidTrustPay USD</option-->
+<?php
 
+}
+?>
       </select>
 <img style="margin: 10px 10% 0 10%;" src="<?php echo Yii::app()->theme->baseUrl; ?>/images/next.png"/>
 
